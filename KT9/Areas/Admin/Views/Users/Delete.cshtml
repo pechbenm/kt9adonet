@@ -1,0 +1,21 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Удаление пользователя";
+}
+
+<h1 class="h3 mb-4">Удалить пользователя?</h1>
+
+<div class="alert alert-warning">
+    Действие необратимо. Будет удалена учётная запись <strong>@Model.Email</strong>
+    @if (!string.IsNullOrEmpty(Model.FullName))
+    {
+        <text>(@Model.FullName)</text>
+    }
+.
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

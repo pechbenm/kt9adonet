@@ -1,0 +1,73 @@
+﻿@model UserListViewModel
+@{
+    ViewData["Title"] = "Пользователи";
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Пользователи</h1>
+    <a asp-action="Create" class="btn btn-primary">Добавить пользователя</a>
+</div>
+
+<form method="get" class="d-flex gap-2 mb-3">
+    <input name="search" value="@Model.Search" class="form-control w-auto" placeholder="Email или имя" />
+    <button type="submit" class="btn btn-outline-secondary">Найти</button>
+    @if (!string.IsNullOrEmpty(Model.Search))
+    {
+        <a asp-action="Index" class="btn btn-link">Сбросить</a>
+    }
+</form>
+
+<div class="table-responsive bg-white border rounded">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Email</th>
+                <th>Имя</th>
+                <th>Роль</th>
+                <th>Статус</th>
+                <th>Создан (UTC)</th>
+                <th class="text-end">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model.Users)
+            {
+                <tr>
+                    <td>@u.Email</td>
+                    <td>@u.FullName</td>
+                    <td>
+                        @foreach (var r in u.Roles)
+                        {
+                            <span class="badge @(r == AppRoles.Admin ? "bg-danger" : "bg-secondary")">@r</span>
+                        }
+                    </td>
+                    <td>
+                        @if (u.IsLockedOut)
+                        {
+                            <span class="badge bg-warning text-dark">Заблокирован</span>
+                        }
+                        else
+                        {
+
+                            <span class="badge bg-success">Активен</span>
+                        }
+                    </td>
+                    <td>@u.CreatedAt.ToString("dd.MM.yyyy")</td>
+                    <td class="text-end text-nowrap">
+                        <a asp-action="Details" asp-route-id="@u.Id" class="btn btn-sm btn-outline-secondary">Открыть</a>
+                        <a asp-action="Edit" asp-route-id="@u.Id" class="btn btn-sm btn-outline-primary">Изменить</a>
+                        @if (u.Id != currentUserId)
+                        {
+                            <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-sm btn-outline-danger">Удалить</a>
+                        }
+                    </td>
+                </tr>
+            }
+            @if (!Model.Users.Any())
+            {
+                <tr><td colspan="6" class="text-center text-muted py-4">Пользователи не найдены</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

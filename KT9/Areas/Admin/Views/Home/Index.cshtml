@@ -1,0 +1,35 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Обзор";
+}
+
+<h1 class="h3 mb-4">Обзор</h1>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-muted">Всего пользователей</div>
+                <div class="display-6">@Model.TotalUsers</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-muted">Администраторов</div>
+                <div class="display-6">@Model.Admins</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-muted">Новых за 30 дней</div>
+                <div class="display-6">@Model.NewLast30Days</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-controller="Users" asp-action="Index" class="btn btn-primary mt-4">Управление пользователями</a>

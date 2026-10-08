@@ -1,0 +1,69 @@
+﻿@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    string Active(string name) =>
+        string.Equals(controller, name, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — Админ-панель</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-wrapper">
+
+        <nav class="admin-sidebar">
+            <a class="admin-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">Админ-панель</a>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link @Active("Home")" asp-area="Admin" asp-controller="Home" asp-action="Index">Обзор</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @Active("Users")" asp-area="Admin" asp-controller="Users" asp-action="Index">Пользователи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @Active("Settings")" asp-area="Admin" asp-controller="Settings" asp-action="Index">Настройки</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @Active("Reports")" asp-area="Admin" asp-controller="Reports" asp-action="Index">Отчёты</a>
+                </li>
+            </ul>
+            <div class="mt-auto pt-3 border-top border-secondary">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">← На сайт</a>
+            </div>
+        </nav>
+
+        <div class="admin-main">
+            <header class="admin-topbar">
+                <span class="text-muted">@User.Identity?.Name</span>
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">Выйти</button>
+                </form>
+            </header>
+
+            <main class="admin-content">
+                @if (TempData["Success"] is string ok)
+                {
+                    <div class="alert alert-success alert-dismissible fade show">
+                        @ok <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+                @if (TempData["Error"] is string err)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        @err <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@model UserViewModel
+@{
+    ViewData["Title"] = "Пользователь";
+}
+
+<h1 class="h3 mb-4">Пользователь</h1>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+            <dt class="col-sm-3">Полное имя</dt>
+            <dd class="col-sm-9">@(Model.FullName ?? "—")</dd>
+            <dt class="col-sm-3">Роли</dt>
+            <dd class="col-sm-9">
+                @foreach (var r in Model.Roles)
+                {
+                    <span class="badge @(r == AppRoles.Admin ? "bg-danger" : "bg-secondary")">@r</span>
+                }
+            </dd>
+            <dt class="col-sm-3">Статус</dt>
+            <dd class="col-sm-9">@(Model.IsLockedOut ? "Заблокирован" : "Активен")</dd>
+            <dt class="col-sm-3">Создан (UTC)</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Изменить</a>
+<a asp-action="Index" class="btn btn-secondary">К списку</a>

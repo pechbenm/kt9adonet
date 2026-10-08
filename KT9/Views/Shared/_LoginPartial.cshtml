@@ -1,0 +1,27 @@
+﻿@using KT9.Security
+@inject Microsoft.AspNetCore.Identity.SignInManager<KT9.Models.ApplicationUser> SignInManager
+
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @if (User.IsInRole(AppRoles.Admin))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Админ-панель</a>
+            </li>
+        }
+        <li class="nav-item"><span class="nav-link text-dark">@User.Identity!.Name</span></li>
+        <li class="nav-item">
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                <button type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+        </li>
+    }
+</ul>

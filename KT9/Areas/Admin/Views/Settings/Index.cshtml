@@ -1,0 +1,23 @@
+﻿@model SettingsViewModel
+@{
+    ViewData["Title"] = "Настройки";
+    string YesNo(bool value) => value ? "да" : "нет";
+}
+
+<h1 class="h3 mb-4">Настройки</h1>
+
+<div class="card">
+    <div class="card-header">Безопасность (только чтение)</div>
+    <table class="table mb-0">
+        <tbody>
+            <tr><th style="width:50%">Окружение</th><td>@Model.Environment</td></tr>
+            <tr><th>Минимальная длина пароля</th><td>@Model.PasswordMinLength</td></tr>
+            <tr><th>Нужна цифра</th><td>@YesNo(Model.RequireDigit)</td></tr>
+            <tr><th>Нужна заглавная буква</th><td>@YesNo(Model.RequireUpper)</td></tr>
+            <tr><th>Нужна строчная буква</th><td>@YesNo(Model.RequireLower)</td></tr>
+            <tr><th>Нужен спецсимвол</th><td>@YesNo(Model.RequireSpecial)</td></tr>
+            <tr><th>Неудачных попыток до блокировки</th><td>@Model.MaxFailedAttempts</td></tr>
+            <tr><th>Длительность блокировки, мин</th><td>@Model.LockoutMinutes</td></tr>
+        </tbody>
+    </table>
+</div>

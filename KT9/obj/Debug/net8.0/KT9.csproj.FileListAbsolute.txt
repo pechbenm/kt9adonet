@@ -1,0 +1,9 @@
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.csproj.AssemblyReference.cache
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.AssemblyInfoInputs.cache
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.AssemblyInfo.cs
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.csproj.CoreCompileInputs.cache
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.RazorAssemblyInfo.cache
+C:\Users\0\source\repos\KT9\KT9\obj\Debug\net8.0\KT9.RazorAssemblyInfo.cs

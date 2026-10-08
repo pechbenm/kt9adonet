@@ -1,0 +1,33 @@
+﻿@model ReportsViewModel
+@{
+    ViewData["Title"] = "Отчёты";
+}
+
+<h1 class="h3 mb-4">Отчёты</h1>
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <h2 class="h5">Пользователи по ролям</h2>
+        <table class="table table-sm bg-white">
+            <thead><tr><th>Роль</th><th class="text-end">Пользователей</th></tr></thead>
+            <tbody>
+                @foreach (var r in Model.ByRole)
+                {
+                    <tr><td>@r.Role</td><td class="text-end">@r.Count</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-7">
+        <h2 class="h5">Регистрации за 6 месяцев</h2>
+        <table class="table table-sm bg-white">
+            <thead><tr><th>Месяц</th><th class="text-end">Новых пользователей</th></tr></thead>
+            <tbody>
+                @foreach (var m in Model.ByMonth)
+                {
+                    <tr><td>@m.Month</td><td class="text-end">@m.Count</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
